@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController
+typedef struct SearchRequest {
     
-    @property (nonatomic, strong) UILabel *labelFrom;
+    __unsafe_unretained NSString *origin;
     
-    @property (nonatomic, strong) UILabel *labelTo;
+    __unsafe_unretained NSString *destionation;
     
-    @property (nonatomic, strong) UITextField *textFieldFrom;
+    __unsafe_unretained NSDate *departDate;
     
-    @property (nonatomic, strong) UITextField *textFieldTo;
+    __unsafe_unretained NSDate *returnDate;
+} SearchRequest;
 
+@interface MainViewController : UIViewController
+  
 @end
 
