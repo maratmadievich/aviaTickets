@@ -20,10 +20,11 @@
     
     CGRect windowFrame = [[UIScreen mainScreen] bounds];
     self.window = [[UIWindow alloc] initWithFrame: windowFrame];
-    
+
     MainViewController *mainViewController = [[MainViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: mainViewController];
-    
+
+
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     

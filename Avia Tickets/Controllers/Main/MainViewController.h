@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface MainViewController : UIViewController
+    
+    @property (nonatomic, strong) UILabel *labelFrom;
+    
+    @property (nonatomic, strong) UILabel *labelTo;
+    
+    @property (nonatomic, strong) UITextField *textFieldFrom;
+    
+    @property (nonatomic, strong) UITextField *textFieldTo;
 
 @end
 
-NS_ASSUME_NONNULL_END
