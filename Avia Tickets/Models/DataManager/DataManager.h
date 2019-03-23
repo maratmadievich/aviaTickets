@@ -22,6 +22,7 @@ typedef enum DataSourceType {
     DataSourceTypeAirport
 } DataSourceType;
 
+
 @interface DataManager : NSObject
     
     @property (nonatomic, strong, readonly) NSArray *countries;

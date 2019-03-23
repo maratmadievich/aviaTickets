@@ -16,6 +16,8 @@
 		AA0D3072224603DD00D83DC7 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D3071224603DD00D83DC7 /* City.m */; };
 		AA0D3076224604B000D83DC7 /* Airport.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D3075224604B000D83DC7 /* Airport.m */; };
 		AA0D307A2246056800D83DC7 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D30792246056800D83DC7 /* DataManager.m */; };
+		AA0D307E2246641C00D83DC7 /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D307D2246641C00D83DC7 /* PlaceViewController.m */; };
+		AA0D308322466ABA00D83DC7 /* PlaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D308222466ABA00D83DC7 /* PlaceCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,10 @@
 		AA0D3075224604B000D83DC7 /* Airport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Airport.m; sourceTree = "<group>"; };
 		AA0D30782246056800D83DC7 /* DataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		AA0D30792246056800D83DC7 /* DataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		AA0D307C2246641C00D83DC7 /* PlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
+		AA0D307D2246641C00D83DC7 /* PlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
+		AA0D308122466ABA00D83DC7 /* PlaceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceCell.h; sourceTree = "<group>"; };
+		AA0D308222466ABA00D83DC7 /* PlaceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				AA0D306A2246031000D83DC7 /* Main */,
+				AA0D307F22466A8900D83DC7 /* Cells */,
 				AA0D30642246015200D83DC7 /* Controllers */,
 				AA0D3069224602FE00D83DC7 /* Models */,
 				AA0D304E224600B800D83DC7 /* AppDelegate.h */,
@@ -83,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				AA0D30652246017400D83DC7 /* Main */,
+				AA0D307B224663B800D83DC7 /* Place */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -150,6 +158,32 @@
 				AA0D30792246056800D83DC7 /* DataManager.m */,
 			);
 			path = DataManager;
+			sourceTree = "<group>";
+		};
+		AA0D307B224663B800D83DC7 /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				AA0D307C2246641C00D83DC7 /* PlaceViewController.h */,
+				AA0D307D2246641C00D83DC7 /* PlaceViewController.m */,
+			);
+			path = Place;
+			sourceTree = "<group>";
+		};
+		AA0D307F22466A8900D83DC7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AA0D308022466A9D00D83DC7 /* Place */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		AA0D308022466A9D00D83DC7 /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				AA0D308122466ABA00D83DC7 /* PlaceCell.h */,
+				AA0D308222466ABA00D83DC7 /* PlaceCell.m */,
+			);
+			path = Place;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,7 +258,9 @@
 				AA0D3072224603DD00D83DC7 /* City.m in Sources */,
 				AA0D306E2246036400D83DC7 /* Country.m in Sources */,
 				AA0D307A2246056800D83DC7 /* DataManager.m in Sources */,
+				AA0D308322466ABA00D83DC7 /* PlaceCell.m in Sources */,
 				AA0D305E224600C000D83DC7 /* main.m in Sources */,
+				AA0D307E2246641C00D83DC7 /* PlaceViewController.m in Sources */,
 				AA0D3076224604B000D83DC7 /* Airport.m in Sources */,
 				AA0D30682246019400D83DC7 /* MainViewController.m in Sources */,
 				AA0D3050224600B800D83DC7 /* AppDelegate.m in Sources */,
