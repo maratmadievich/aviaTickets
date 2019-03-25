@@ -7,19 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FeedsViewController.h"
+#import "PlaceViewController.h"
+#import "TicketsViewController.h"
+#import "Enums.h"
+#import "ApiManager.h"
+#import "DataManager.h"
 
-typedef struct SearchRequest {
-    
-    __unsafe_unretained NSString *origin;
-    
-    __unsafe_unretained NSString *destionation;
-    
-    __unsafe_unretained NSDate *departDate;
-    
-    __unsafe_unretained NSDate *returnDate;
-} SearchRequest;
 
 @interface MainViewController : UIViewController
+    
+    @property (nonatomic, strong) UIView *placeContainerView;
+    
+    @property (nonatomic, strong) UIButton *departureButton;
+    
+    @property (nonatomic, strong) UIButton *arrivalButton;
+    
+    @property (nonatomic, strong) UIButton *searchButton;
+    
+    @property (nonatomic, strong) UIBarButtonItem *feedsButton;
+    
+    
+    @property (nonatomic) SearchRequest searchRequest;
   
 @end
 

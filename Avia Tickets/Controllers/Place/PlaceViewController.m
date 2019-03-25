@@ -28,9 +28,11 @@
 @implementation PlaceViewController
 
     - (instancetype)initWithType:(PlaceType)type {
+        
         self = [super init];
         
         if (self) {
+            
             _placeType = type;
         }
     
@@ -117,8 +119,8 @@
 
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
        
-//        return [_currentArray count];
-        return 10;
+        return [_currentArray count];
+//        return 10;
     }
 
     - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,17 +162,17 @@
             
             City *city = [_currentArray objectAtIndex:indexPath.row];
             
-            cell.labelName.text = @"Город";//city.name;
+            cell.labelName.text = city.name;
             
-            cell.labelCode.text = @"Код города";//city.code;
+            cell.labelCode.text = city.code;
         }
         else if (_segmentedControl.selectedSegmentIndex == 1) {
             
             Airport *airport = [_currentArray objectAtIndex:indexPath.row];
             
-            cell.labelName.text = @"Аэропорт";//airport.name;
+            cell.labelName.text = airport.name;
             
-            cell.labelCode.text = @"Код аэропорта";//airport.code;
+            cell.labelCode.text = airport.code;
         }
         
         return cell;

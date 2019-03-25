@@ -8,13 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DataManager.h"
-
-typedef enum PlaceType {
-    
-    PlaceTypeArrival,
-    
-    PlaceTypeDeparture
-} PlaceType;
+#import "Enums.h"
 
 
 @protocol PlaceViewControllerDelegate <NSObject>

@@ -11,6 +11,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+    
+    //78ff992a36b410676c29a8205333905d my token
 
 
 @end
