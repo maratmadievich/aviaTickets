@@ -35,6 +35,8 @@
     - (void)loadData;
     
     - (City *)cityForIATA:(NSString *)iata;
+
+    - (City *)cityForLocation:(CLLocation *)location;
     
 @end
 

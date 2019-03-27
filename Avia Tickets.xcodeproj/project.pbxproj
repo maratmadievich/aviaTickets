@@ -31,6 +31,9 @@
 		AA0D30AA2247F1E800D83DC7 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D30A92247F1E800D83DC7 /* FeedCell.m */; };
 		AA0D30AE2247F64500D83DC7 /* FeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D30AD2247F64500D83DC7 /* FeedsViewController.m */; };
 		AA0D30B222488B6100D83DC7 /* FeedInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D30B122488B6100D83DC7 /* FeedInfoViewController.m */; };
+		AAB6C087224BC60C00BFCE63 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6C086224BC60C00BFCE63 /* LocationService.m */; };
+		AAB6C08B224BC78800BFCE63 /* MapPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6C08A224BC78800BFCE63 /* MapPrice.m */; };
+		AAB6C08F224BCC9700BFCE63 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6C08E224BCC9700BFCE63 /* MapViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +82,12 @@
 		AA0D30AD2247F64500D83DC7 /* FeedsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedsViewController.m; sourceTree = "<group>"; };
 		AA0D30B022488B6100D83DC7 /* FeedInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedInfoViewController.h; sourceTree = "<group>"; };
 		AA0D30B122488B6100D83DC7 /* FeedInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedInfoViewController.m; sourceTree = "<group>"; };
+		AAB6C085224BC60C00BFCE63 /* LocationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
+		AAB6C086224BC60C00BFCE63 /* LocationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
+		AAB6C089224BC78800BFCE63 /* MapPrice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPrice.h; sourceTree = "<group>"; };
+		AAB6C08A224BC78800BFCE63 /* MapPrice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPrice.m; sourceTree = "<group>"; };
+		AAB6C08D224BCC9700BFCE63 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		AAB6C08E224BCC9700BFCE63 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +150,7 @@
 		AA0D30642246015200D83DC7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AAB6C08C224BC92500BFCE63 /* Map */,
 				AA0D30AB2247F62A00D83DC7 /* Feed */,
 				AA0D30AF22488B4900D83DC7 /* FeedInfo */,
 				AA0D30652246017400D83DC7 /* Main */,
@@ -162,10 +172,11 @@
 		AA0D3069224602FE00D83DC7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AA0D30A32247EE7600D83DC7 /* Feed */,
 				AA0D3073224604A300D83DC7 /* Airport */,
 				AA0D306F224603D000D83DC7 /* City */,
 				AA0D306B2246032600D83DC7 /* Country */,
+				AA0D30A32247EE7600D83DC7 /* Feed */,
+				AAB6C088224BC76600BFCE63 /* MapPrice */,
 				AA0D30902247AEB600D83DC7 /* Ticket */,
 			);
 			path = Models;
@@ -268,6 +279,7 @@
 			children = (
 				AA0D3084224767D900D83DC7 /* ApiManager */,
 				AA0D30772246054F00D83DC7 /* DataManager */,
+				AAB6C084224BC56700BFCE63 /* LocationManager */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -342,6 +354,33 @@
 				AA0D30B122488B6100D83DC7 /* FeedInfoViewController.m */,
 			);
 			path = FeedInfo;
+			sourceTree = "<group>";
+		};
+		AAB6C084224BC56700BFCE63 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				AAB6C085224BC60C00BFCE63 /* LocationService.h */,
+				AAB6C086224BC60C00BFCE63 /* LocationService.m */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
+		AAB6C088224BC76600BFCE63 /* MapPrice */ = {
+			isa = PBXGroup;
+			children = (
+				AAB6C089224BC78800BFCE63 /* MapPrice.h */,
+				AAB6C08A224BC78800BFCE63 /* MapPrice.m */,
+			);
+			path = MapPrice;
+			sourceTree = "<group>";
+		};
+		AAB6C08C224BC92500BFCE63 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				AAB6C08D224BCC9700BFCE63 /* MapViewController.h */,
+				AAB6C08E224BCC9700BFCE63 /* MapViewController.m */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		FE68726895280FA67A065FDE /* Frameworks */ = {
@@ -450,11 +489,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAB6C087224BC60C00BFCE63 /* LocationService.m in Sources */,
 				AA0D30AE2247F64500D83DC7 /* FeedsViewController.m in Sources */,
 				AA0D3087224767F400D83DC7 /* ApiManager.m in Sources */,
 				AA0D3072224603DD00D83DC7 /* City.m in Sources */,
 				AA0D309E2247B58B00D83DC7 /* TicketCell.m in Sources */,
 				AA0D306E2246036400D83DC7 /* Country.m in Sources */,
+				AAB6C08F224BCC9700BFCE63 /* MapViewController.m in Sources */,
 				AA0D307A2246056800D83DC7 /* DataManager.m in Sources */,
 				AA0D308322466ABA00D83DC7 /* PlaceCell.m in Sources */,
 				AA0D305E224600C000D83DC7 /* main.m in Sources */,
@@ -463,6 +504,7 @@
 				AA0D30A22247B78000D83DC7 /* TicketsViewController.m in Sources */,
 				AA0D30A62247EE9900D83DC7 /* Feed.m in Sources */,
 				AA0D307E2246641C00D83DC7 /* PlaceViewController.m in Sources */,
+				AAB6C08B224BC78800BFCE63 /* MapPrice.m in Sources */,
 				AA0D3076224604B000D83DC7 /* Airport.m in Sources */,
 				AA0D30932247AEC900D83DC7 /* Ticket.m in Sources */,
 				AA0D30682246019400D83DC7 /* MainViewController.m in Sources */,

@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,16 +18,30 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     CGRect windowFrame = [[UIScreen mainScreen] bounds];
+    
     self.window = [[UIWindow alloc] initWithFrame: windowFrame];
 
-    MainViewController *mainViewController = [[MainViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: mainViewController];
-
-
+    
+//    MainViewController *mainViewController = [[MainViewController alloc] init];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: mainViewController];
+//
+//
+//    self.window.rootViewController = navigationController;
+//    [self.window makeKeyAndVisible];
+//
+//    return YES;
+    
+    
+    MapViewController *mapViewController = [[MapViewController alloc] init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: mapViewController];
+    
     self.window.rootViewController = navigationController;
+    
     [self.window makeKeyAndVisible];
     
     return YES;
+
 }
 
 

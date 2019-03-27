@@ -17,6 +17,11 @@
 #define NEWS_API_URL @"https://newsapi.org/v2/top-headlines"
 
 
+#define API_URL_MAP_PRICE @"https://map.aviasales.ru/prices.json?"
+
+//#define API_URL_MAP_PRICE @"https://map.aviasales.ru/supported_directions.json?one_way=false&locale=ru&origin_iata="
+
+
 @implementation ApiManager
 
     + (instancetype)sharedInstance {
@@ -186,7 +191,84 @@
         
     }
     
+
+    - (void)mapPricesFor:(City *)origin withCompletion:(void (^)(NSArray *prices))completion {
+        
+        static BOOL isLoading;
+        
+        if (isLoading) { return; }
+        
+        isLoading = YES;
+        
+        [self load:[NSString stringWithFormat:@"%@%@", API_URL_MAP_PRICE, [self mapPricesKeys: origin.code]] withCompletion:^(id  _Nullable result) {
+            
+            NSLog(@"%@", result);
+            
+            NSArray *array = result;
+            
+            NSMutableArray *prices = [NSMutableArray new];
+            
+            if (array) {
+            
+                for (NSDictionary *mapPriceDictionary in array) {
+                
+                    MapPrice *mapPrice = [[MapPrice alloc] initWithDictionary:mapPriceDictionary withOrigin:origin];
+                    
+                    [prices addObject:mapPrice];
+                }
+                
+                isLoading = NO;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                
+                    completion(prices);
+                });
+                
+            }
+            
+        }];
+        
+    }
+
+
+    - (NSString *)mapPricesKeys:(NSString *)code {
+        /*
+        origin_iata — iata код пункта отправления. IATA код указывается буквами верхнего регистра, например MOW
+        period — период дат для поиска:
+        month — отображать только перелёты в указанном месяце (необходимо указывать дату начала месяца, например, 2017-01-01);
+        season — отображать перелеты, входящие в сезон, указанного месяца (зима, весна, лето, осень);
+        year — весь год (дату можно не указывать).
+        direct — указывает на наличие перелетов без пересадок.
+        one_way — «true» для перелетов в одну сторону, «false» для туда-обратно.
+        no_visa — оплата не картой виза.
+        schengen — возможность поменять билет.
+        need_visa — требуется ли Visa.
+        locale — язык поиска.
+        min_trip_duration_in_days — минимальная продолжительность поездки (дней).
+        max_trip_duration_in_days — максимальная продолжительность поездки (дней).
+        */
+        return [NSString stringWithFormat:@"direct=true&one_way=false&no_visa=true&schengen=true&need_visa=true&locale=ru&min_trip_duration_in_days=7&max_trip_duration_in_days=10&period=%@:season&origin_iata=%@", [self getFirstDateOfMonth], code];
+        
+    }
+
+    - (NSString *)getFirstDateOfMonth {
     
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        
+        dateFormatter.dateFormat = @"yyyy-MM";
+        
+        NSString* firstDayOfMonth = [dateFormatter stringFromDate: [NSDate date]];
+        
+        return [NSString stringWithFormat:@"%@-01", firstDayOfMonth];
+    }
+
+
+
+
+
+
+
+
     
 
 
