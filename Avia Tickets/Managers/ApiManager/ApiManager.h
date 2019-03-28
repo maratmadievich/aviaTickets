@@ -10,6 +10,7 @@
 #import "Feed.h"
 #import "Enums.h"
 #import "Ticket.h"
+#import "MapPrice.h"
 #import "DataManager.h"
 
 
@@ -22,6 +23,8 @@
     - (void)ticketsWithRequest:(SearchRequest)request withCompletion:(void (^)(NSArray *tickets))completion;
     
     - (void)feedsWithRequest:(NSString*)searchString withCompletion:(void (^)(NSArray *feeds))completion;
+
+    - (void)mapPricesFor:(City *)origin withCompletion:(void (^)(NSArray *prices))completion;
 
 @end
 

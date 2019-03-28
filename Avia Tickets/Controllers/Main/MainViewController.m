@@ -127,15 +127,6 @@
         [_searchButton addTarget:self action:@selector(searchButtonDidTap:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.view addSubview:_searchButton];
-        
-        
-        _feedsButton = [[UIBarButtonItem alloc]
-                        initWithTitle: @"Новости"
-                        style: UIBarButtonItemStylePlain
-                        target: self
-                        action: @selector(feedsButtonDidTap:)];
-        
-        self.navigationItem.rightBarButtonItem = _feedsButton;
     }
 
 
@@ -180,40 +171,6 @@
         }];
         
     }
-    
-    
-    - (void)feedsButtonDidTap:(UIButton *)sender {
-        
-        [[ApiManager sharedInstance] feedsWithRequest: @"ru" withCompletion: ^(NSArray *feeds) {//bbc-news
-            
-            if (feeds.count > 0) {
-                
-                FeedsViewController *feedsViewController = [[FeedsViewController alloc] initWithFeeds: feeds];
-                
-                [self.navigationController showViewController:feedsViewController sender:self];
-            }
-            else {
-                
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Увы!" message:@"Не получилось найти новости или ошибка реализации" preferredStyle: UIAlertControllerStyleAlert];
-                
-                [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть" style:(UIAlertActionStyleDefault) handler:nil]];
-                
-                [self presentViewController:alertController animated:YES completion:nil];
-            }
-            
-        }];
-        
-    }
-
-    
-//    -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//       
-//        UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
-//        
-//        backItem.title = @"";
-//        
-//        self.navigationItem.backBarButtonItem = backItem;
-//    }
     
     
 #pragma mark - PlaceViewControllerDelegate
