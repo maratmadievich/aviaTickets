@@ -16,24 +16,43 @@
 
 @implementation FeedsViewController
 
-- (instancetype)initWithFeeds:(NSArray *)feeds {
+//    - (instancetype)initWithFeeds:(NSArray *)feeds {
+//    
+//        self = [super init];
+//        
+//        if (self) {
+//            
+//            _feeds = feeds;
+//            
+//            self.title = @" Новости";
+//            
+//            self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//            
+//            [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellReuseIdentifier];
+//        }
+//        
+//        return self;
+//    }
+
+
+    - (void)viewDidLoad {
     
-    self = [super init];
-    
-    if (self) {
-        
-        _feeds = feeds;
-        
-        self.title = @" Новости";
+        [super viewDidLoad];
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:FeedCellReuseIdentifier];
+    
+        [[ApiManager sharedInstance] feedsWithRequest: @"ru" withCompletion: ^(NSArray *feeds) {
+            
+            self.feeds = feeds;
+            
+            [self.tableView reloadData];
+        }];
+            
     }
-    
-    return self;
-}
-    
+
+
     
 #pragma mark - UITableViewDataSource & UITableViewDelegate
     

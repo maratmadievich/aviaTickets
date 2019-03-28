@@ -17,31 +17,79 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
+    //Создание окна
     CGRect windowFrame = [[UIScreen mainScreen] bounds];
     
     self.window = [[UIWindow alloc] initWithFrame: windowFrame];
 
+    //Инициализация окна выбора билетов
+    MainViewController *ticketsViewController = [[MainViewController alloc] init];
     
-//    MainViewController *mainViewController = [[MainViewController alloc] init];
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: mainViewController];
-//
-//
-//    self.window.rootViewController = navigationController;
-//    [self.window makeKeyAndVisible];
-//
-//    return YES;
+    ticketsViewController.title = @"Билеты";
+    
+    UINavigationController *ticketsNavigationController = [[UINavigationController alloc] initWithRootViewController: ticketsViewController];
     
     
+    //Инициализация окна вывода новостей
+    FeedsViewController *feedsViewController = [[FeedsViewController alloc] init];
+    
+    feedsViewController.title = @"Новости";
+    
+    UINavigationController *feedsNavigationController = [[UINavigationController alloc] initWithRootViewController: feedsViewController];
+    
+    
+    //Инициализация окна отображения карты
     MapViewController *mapViewController = [[MapViewController alloc] init];
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController: mapViewController];
+    mapViewController.title = @"Карта";
     
-    self.window.rootViewController = navigationController;
+    UINavigationController *mapNavigationController = [[UINavigationController alloc] initWithRootViewController: mapViewController];
+    
+    
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
+    NSArray *tabsArray = [[NSArray alloc] initWithObjects: ticketsNavigationController,
+                          feedsNavigationController,
+                          mapNavigationController,
+                          nil];
+    
+    tabBarController.viewControllers = tabsArray;
+    
+    int i = 0;
+    
+    for (UIBarButtonItem *barButton in tabBarController.toolbarItems) {
+        
+        switch (i) {
+            case 0:
+                
+                barButton.image = [UIImage imageNamed: @"search"];
+                
+                break;
+                
+            case 1:
+                
+                barButton.image = [UIImage imageNamed: @"news"];
+                
+                break;
+                
+            default:
+                
+                barButton.image = [UIImage imageNamed: @"map"];
+                
+                break;
+                
+        }
+        
+        i += 1;
+    }
+    
+    self.window.rootViewController = tabBarController;
     
     [self.window makeKeyAndVisible];
     
     return YES;
-
 }
 
 

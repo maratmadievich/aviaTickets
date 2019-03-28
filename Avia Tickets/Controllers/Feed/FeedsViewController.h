@@ -7,16 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FeedInfoViewController.h"
 #import "FeedCell.h"
+#import "ApiManager.h"
+#import "FeedInfoViewController.h"
 
 
 @interface FeedsViewController : UITableViewController
     
     @property (nonatomic, strong) NSArray *feeds;
     
-   
-    - (instancetype)initWithFeeds:(NSArray *)feeds;
 
 @end
 
