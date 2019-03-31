@@ -7,21 +7,12 @@
 //
 
 #import "PlaceViewController.h"
-#import "PlaceCell.h"
 
 #define ReuseIdentifier @"CellIdentifier"
 
 
-@interface PlaceViewController ()
-    
-    @property (nonatomic) PlaceType placeType;
-    
-    @property (nonatomic, strong) UITableView *tableView;
-    
-    @property (nonatomic, strong) UISegmentedControl *segmentedControl;
-    
-    @property (nonatomic, strong) NSArray *currentArray;
-
+@interface PlaceViewController () <UISearchResultsUpdating>
+  
 @end
 
 
@@ -53,15 +44,49 @@
         self.navigationController.navigationBar.tintColor = [UIColor blackColor];
         
         
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
         
-        _tableView.delegate = self;
+        _searchController.dimsBackgroundDuringPresentation = NO;
         
-        _tableView.dataSource = self;
+        _searchController.searchResultsUpdater = self;
         
-        _tableView.tableFooterView = nil;
+        _searchArray = [NSArray new];
         
-        [self.view addSubview:_tableView];
+        
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        
+        layout.minimumLineSpacing = 10.0;
+        
+        layout.minimumInteritemSpacing = 10.0;
+        
+        layout.itemSize = CGSizeMake(100.0, 100.0);
+        
+        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+        
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        
+        _collectionView.delegate = self;
+        
+        _collectionView.dataSource = self;
+        
+        [_collectionView registerClass:[PlaceCollectionCell class] forCellWithReuseIdentifier:ReuseIdentifier];
+        
+//        _collectionView.tableFooterView = [[UIView alloc] init];
+        
+        if (@available(iOS 11.0, *)) {
+            
+            self.navigationItem.searchController = _searchController;
+            
+            self.navigationItem.hidesSearchBarWhenScrolling = NO;
+        }
+        else {
+            
+//            _collectionView.heade = _searchController.searchBar;
+        }
+
+        [self.view addSubview:_collectionView];
         
         
         _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Города", @"Аэропорты"]];
@@ -109,58 +134,45 @@
             break;
         }
         
-        [self.tableView reloadData];
+        [self.collectionView reloadData];
     }
     
     
-    
-    
-#pragma mark - UITableViewDataSource
+#pragma mark - UISearchResultsUpdating
 
-    - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-       
-        return [_currentArray count];
-//        return 10;
-    }
-
-    - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ReuseIdentifier];
-//
-//        if (!cell) {
-//
-//            cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:ReuseIdentifier];
-//
-//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        }
-//
-//        if (_segmentedControl.selectedSegmentIndex == 0) {
-//
-//            City *city = [_currentArray objectAtIndex:indexPath.row];
-//
-//            cell.textLabel.text = city.name;
-//
-//            cell.detailTextLabel.text = city.code;
-//        }
-//        else if (_segmentedControl.selectedSegmentIndex == 1) {
-//
-//            Airport *airport = [_currentArray objectAtIndex:indexPath.row];
-//
-//            cell.textLabel.text = airport.name;
-//
-//            cell.detailTextLabel.text = airport.code;
-//        }
+    - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
         
-        PlaceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlaceCell"];
-        
-        if (!cell) {
+        if (searchController.searchBar.text) {
+           
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name CONTAINS[cd] %@", searchController.searchBar.text];
+           
+            _searchArray = [_currentArray filteredArrayUsingPredicate: predicate];
             
-            cell = [[PlaceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
+            [_collectionView reloadData];
         }
+        
+    }
+
+    
+#pragma mark - UICollectionViewDataSource
+
+    - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+        
+        return (_searchController.isActive && [_searchArray count] > 0) ? [_searchArray count] : [_currentArray count];
+    }
+
+    - (CGSize)collectionView:(UICollectionView *)collectionView layout:   (UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+   
+        return CGSizeMake(100, 100);
+    }
+
+    - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+        
+        PlaceCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: ReuseIdentifier  forIndexPath:indexPath];
         
         if (_segmentedControl.selectedSegmentIndex == 0) {
             
-            City *city = [_currentArray objectAtIndex:indexPath.row];
+            City *city = (_searchController.isActive && [_searchArray count] > 0) ? [_searchArray objectAtIndex: indexPath.row] : [_currentArray objectAtIndex: indexPath.row];
             
             cell.labelName.text = city.name;
             
@@ -168,7 +180,7 @@
         }
         else if (_segmentedControl.selectedSegmentIndex == 1) {
             
-            Airport *airport = [_currentArray objectAtIndex:indexPath.row];
+            Airport *airport = (_searchController.isActive && [_searchArray count] > 0) ? [_searchArray objectAtIndex: indexPath.row] : [_currentArray objectAtIndex: indexPath.row];
             
             cell.labelName.text = airport.name;
             
@@ -178,20 +190,27 @@
         return cell;
     }
     
-    - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+#pragma mark - UICollectionViewDelegate
+
+    - (void)collectionView:(UICollectionView *)collectionView
+  didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         
-        return 70;
-    }
-
-#pragma mark - UITableViewDelegate
-
-    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
         DataSourceType dataType = ((int)_segmentedControl.selectedSegmentIndex) + 1;
-    
-        [self.delegate selectPlace:[_currentArray objectAtIndex:indexPath.row] withType:_placeType andDataType:dataType];
-   
+        
+        if (_searchController.isActive && [_searchArray count] > 0) {
+            
+            [self.delegate selectPlace:[_searchArray objectAtIndex:indexPath.row] withType:_placeType andDataType:dataType];
+            
+            _searchController.active = NO;
+        }
+        else {
+            
+            [self.delegate selectPlace:[_currentArray objectAtIndex:indexPath.row] withType:_placeType andDataType:dataType];
+        }
+        
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
+
 @end

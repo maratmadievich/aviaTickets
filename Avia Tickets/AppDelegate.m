@@ -22,68 +22,8 @@
     CGRect windowFrame = [[UIScreen mainScreen] bounds];
     
     self.window = [[UIWindow alloc] initWithFrame: windowFrame];
-
-    //Инициализация окна выбора билетов
-    MainViewController *ticketsViewController = [[MainViewController alloc] init];
     
-    ticketsViewController.title = @"Билеты";
-    
-    UINavigationController *ticketsNavigationController = [[UINavigationController alloc] initWithRootViewController: ticketsViewController];
-    
-    
-    //Инициализация окна вывода новостей
-    FeedsViewController *feedsViewController = [[FeedsViewController alloc] init];
-    
-    feedsViewController.title = @"Новости";
-    
-    UINavigationController *feedsNavigationController = [[UINavigationController alloc] initWithRootViewController: feedsViewController];
-    
-    
-    //Инициализация окна отображения карты
-    MapViewController *mapViewController = [[MapViewController alloc] init];
-    
-    mapViewController.title = @"Карта";
-    
-    UINavigationController *mapNavigationController = [[UINavigationController alloc] initWithRootViewController: mapViewController];
-    
-    
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    
-    NSArray *tabsArray = [[NSArray alloc] initWithObjects: ticketsNavigationController,
-                          feedsNavigationController,
-                          mapNavigationController,
-                          nil];
-    
-    tabBarController.viewControllers = tabsArray;
-    
-    int i = 0;
-    
-    for (UIBarButtonItem *barButton in tabBarController.toolbarItems) {
-        
-        switch (i) {
-            case 0:
-                
-                barButton.image = [UIImage imageNamed: @"search"];
-                
-                break;
-                
-            case 1:
-                
-                barButton.image = [UIImage imageNamed: @"news"];
-                
-                break;
-                
-            default:
-                
-                barButton.image = [UIImage imageNamed: @"map"];
-                
-                break;
-                
-        }
-        
-        i += 1;
-    }
+    TabBarController *tabBarController = [[TabBarController alloc] init];
     
     self.window.rootViewController = tabBarController;
     
@@ -121,3 +61,69 @@
 
 
 @end
+
+
+/*
+ 
+ //Инициализация окна выбора билетов
+ MainViewController *ticketsViewController = [[MainViewController alloc] init];
+ 
+ ticketsViewController.title = @"Билеты";
+ 
+ UINavigationController *ticketsNavigationController = [[UINavigationController alloc] initWithRootViewController: ticketsViewController];
+ 
+ 
+ //Инициализация окна вывода новостей
+ FeedsViewController *feedsViewController = [[FeedsViewController alloc] init];
+ 
+ feedsViewController.title = @"Новости";
+ 
+ UINavigationController *feedsNavigationController = [[UINavigationController alloc] initWithRootViewController: feedsViewController];
+ 
+ 
+ //Инициализация окна отображения карты
+ MapViewController *mapViewController = [[MapViewController alloc] init];
+ 
+ mapViewController.title = @"Карта";
+ 
+ UINavigationController *mapNavigationController = [[UINavigationController alloc] initWithRootViewController: mapViewController];
+ 
+ 
+ 
+ UITabBarController *tabBarController = [[UITabBarController alloc] init];
+ 
+ NSArray *tabsArray = [[NSArray alloc] initWithObjects: ticketsNavigationController,
+ feedsNavigationController,
+ mapNavigationController,
+ nil];
+ 
+ tabBarController.viewControllers = tabsArray;
+ 
+ int i = 0;
+ 
+ for (UIBarButtonItem *barButton in tabBarController.toolbarItems) {
+ 
+ switch (i) {
+ case 0:
+ 
+ barButton.image = [UIImage imageNamed: @"search"];
+ 
+ break;
+ 
+ case 1:
+ 
+ barButton.image = [UIImage imageNamed: @"news"];
+ 
+ break;
+ 
+ default:
+ 
+ barButton.image = [UIImage imageNamed: @"map"];
+ 
+ break;
+ 
+ }
+ 
+ i += 1;
+ }
+ */

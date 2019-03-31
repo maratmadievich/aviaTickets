@@ -31,6 +31,8 @@
 		AA0D30AA2247F1E800D83DC7 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D30A92247F1E800D83DC7 /* FeedCell.m */; };
 		AA0D30AE2247F64500D83DC7 /* FeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D30AD2247F64500D83DC7 /* FeedsViewController.m */; };
 		AA0D30B222488B6100D83DC7 /* FeedInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D30B122488B6100D83DC7 /* FeedInfoViewController.m */; };
+		AA24392B2250B72100E6816B /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA24392A2250B72100E6816B /* TabBarController.m */; };
+		AA24392E2250C4C000E6816B /* PlaceCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA24392D2250C4C000E6816B /* PlaceCollectionCell.m */; };
 		AAB6C087224BC60C00BFCE63 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6C086224BC60C00BFCE63 /* LocationService.m */; };
 		AAB6C08B224BC78800BFCE63 /* MapPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6C08A224BC78800BFCE63 /* MapPrice.m */; };
 		AAB6C08F224BCC9700BFCE63 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB6C08E224BCC9700BFCE63 /* MapViewController.m */; };
@@ -82,6 +84,10 @@
 		AA0D30AD2247F64500D83DC7 /* FeedsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedsViewController.m; sourceTree = "<group>"; };
 		AA0D30B022488B6100D83DC7 /* FeedInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedInfoViewController.h; sourceTree = "<group>"; };
 		AA0D30B122488B6100D83DC7 /* FeedInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedInfoViewController.m; sourceTree = "<group>"; };
+		AA2439292250B72100E6816B /* TabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		AA24392A2250B72100E6816B /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		AA24392C2250C4C000E6816B /* PlaceCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceCollectionCell.h; sourceTree = "<group>"; };
+		AA24392D2250C4C000E6816B /* PlaceCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceCollectionCell.m; sourceTree = "<group>"; };
 		AAB6C085224BC60C00BFCE63 /* LocationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		AAB6C086224BC60C00BFCE63 /* LocationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
 		AAB6C089224BC78800BFCE63 /* MapPrice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPrice.h; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 		AA0D30642246015200D83DC7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AA2439282250B6FC00E6816B /* TabBar */,
 				AA0D30652246017400D83DC7 /* Main */,
 				AAB6C08C224BC92500BFCE63 /* Map */,
 				AA0D30AB2247F62A00D83DC7 /* Feed */,
@@ -241,6 +248,7 @@
 			children = (
 				AA0D30A72247F1AE00D83DC7 /* Feed */,
 				AA0D308022466A9D00D83DC7 /* Place */,
+				AA24392F2250C4C300E6816B /* PlaceCollection */,
 				AA0D30982247B53500D83DC7 /* Ticket */,
 			);
 			path = Cells;
@@ -354,6 +362,24 @@
 				AA0D30B122488B6100D83DC7 /* FeedInfoViewController.m */,
 			);
 			path = FeedInfo;
+			sourceTree = "<group>";
+		};
+		AA2439282250B6FC00E6816B /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				AA2439292250B72100E6816B /* TabBarController.h */,
+				AA24392A2250B72100E6816B /* TabBarController.m */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		AA24392F2250C4C300E6816B /* PlaceCollection */ = {
+			isa = PBXGroup;
+			children = (
+				AA24392C2250C4C000E6816B /* PlaceCollectionCell.h */,
+				AA24392D2250C4C000E6816B /* PlaceCollectionCell.m */,
+			);
+			path = PlaceCollection;
 			sourceTree = "<group>";
 		};
 		AAB6C084224BC56700BFCE63 /* LocationManager */ = {
@@ -494,6 +520,7 @@
 				AA0D3087224767F400D83DC7 /* ApiManager.m in Sources */,
 				AA0D3072224603DD00D83DC7 /* City.m in Sources */,
 				AA0D309E2247B58B00D83DC7 /* TicketCell.m in Sources */,
+				AA24392B2250B72100E6816B /* TabBarController.m in Sources */,
 				AA0D306E2246036400D83DC7 /* Country.m in Sources */,
 				AAB6C08F224BCC9700BFCE63 /* MapViewController.m in Sources */,
 				AA0D307A2246056800D83DC7 /* DataManager.m in Sources */,
@@ -510,6 +537,7 @@
 				AA0D30682246019400D83DC7 /* MainViewController.m in Sources */,
 				AA0D30AA2247F1E800D83DC7 /* FeedCell.m in Sources */,
 				AA0D3050224600B800D83DC7 /* AppDelegate.m in Sources */,
+				AA24392E2250C4C000E6816B /* PlaceCollectionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
