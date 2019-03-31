@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MapViewController.h"
-#import "MainViewController.h"
+#import "TabBarController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

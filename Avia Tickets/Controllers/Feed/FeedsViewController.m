@@ -49,6 +49,8 @@
             
             [self.tableView reloadData];
         }];
+        
+        self.title = @"Новости";
             
     }
 
