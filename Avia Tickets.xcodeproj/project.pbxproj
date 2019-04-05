@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		166124C03856F9DC03522DF4 /* libPods-Avia Tickets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E6C031DF5D20CCE9017E11 /* libPods-Avia Tickets.a */; };
+		8486BD0A225609230067F824 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486BD09225609230067F824 /* CoreDataHelper.m */; };
+		8486BD1D22561C970067F824 /* TicketsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8486BD1B22561C970067F824 /* TicketsDataModel.xcdatamodeld */; };
+		8486BD2B2256253F0067F824 /* FavoriteTicket+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486BD292256253F0067F824 /* FavoriteTicket+CoreDataClass.m */; };
+		8486BD2C2256253F0067F824 /* FavoriteTicket+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486BD2A2256253F0067F824 /* FavoriteTicket+CoreDataProperties.m */; };
 		AA0D3050224600B800D83DC7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0D304F224600B800D83DC7 /* AppDelegate.m */; };
 		AA0D3058224600BF00D83DC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0D3057224600BF00D83DC7 /* Assets.xcassets */; };
 		AA0D305B224600C000D83DC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA0D3059224600BF00D83DC7 /* LaunchScreen.storyboard */; };
@@ -41,6 +45,13 @@
 /* Begin PBXFileReference section */
 		356FFAD4A728D9ED6DF4C8AF /* Pods-Avia Tickets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Avia Tickets.release.xcconfig"; path = "Target Support Files/Pods-Avia Tickets/Pods-Avia Tickets.release.xcconfig"; sourceTree = "<group>"; };
 		56E6C031DF5D20CCE9017E11 /* libPods-Avia Tickets.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Avia Tickets.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8486BD08225609230067F824 /* CoreDataHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
+		8486BD09225609230067F824 /* CoreDataHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
+		8486BD1C22561C970067F824 /* TicketsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TicketsDataModel.xcdatamodel; sourceTree = "<group>"; };
+		8486BD272256253F0067F824 /* FavoriteTicket+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8486BD282256253F0067F824 /* FavoriteTicket+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FavoriteTicket+CoreDataClass.h"; sourceTree = "<group>"; };
+		8486BD292256253F0067F824 /* FavoriteTicket+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "FavoriteTicket+CoreDataClass.m"; sourceTree = "<group>"; };
+		8486BD2A2256253F0067F824 /* FavoriteTicket+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "FavoriteTicket+CoreDataProperties.m"; sourceTree = "<group>"; };
 		85D7910E8B400683DB944C3B /* Pods-Avia Tickets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Avia Tickets.debug.xcconfig"; path = "Target Support Files/Pods-Avia Tickets/Pods-Avia Tickets.debug.xcconfig"; sourceTree = "<group>"; };
 		AA0D304B224600B800D83DC7 /* Avia Tickets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Avia Tickets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0D304E224600B800D83DC7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -117,6 +128,52 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8486BCF4225606540067F824 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				8486BCF5225606680067F824 /* DataModel */,
+				8486BD06225608DD0067F824 /* Helper */,
+				8486BD07225608E80067F824 /* Models */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		8486BCF5225606680067F824 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8486BD1B22561C970067F824 /* TicketsDataModel.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		8486BCFC2256086E0067F824 /* FavoriteTicket */ = {
+			isa = PBXGroup;
+			children = (
+				8486BD272256253F0067F824 /* FavoriteTicket+CoreDataProperties.h */,
+				8486BD282256253F0067F824 /* FavoriteTicket+CoreDataClass.h */,
+				8486BD292256253F0067F824 /* FavoriteTicket+CoreDataClass.m */,
+				8486BD2A2256253F0067F824 /* FavoriteTicket+CoreDataProperties.m */,
+			);
+			path = FavoriteTicket;
+			sourceTree = "<group>";
+		};
+		8486BD06225608DD0067F824 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				8486BD08225609230067F824 /* CoreDataHelper.h */,
+				8486BD09225609230067F824 /* CoreDataHelper.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		8486BD07225608E80067F824 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8486BCFC2256086E0067F824 /* FavoriteTicket */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		AA0D3042224600B800D83DC7 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +198,7 @@
 				AA0D306A2246031000D83DC7 /* Main */,
 				AA0D307F22466A8900D83DC7 /* Cells */,
 				AA0D30642246015200D83DC7 /* Controllers */,
+				8486BCF4225606540067F824 /* CoreData */,
 				AA0D30942247B03B00D83DC7 /* Enums */,
 				AA0D308F2247AE9D00D83DC7 /* Managers */,
 				AA0D3069224602FE00D83DC7 /* Models */,
@@ -449,6 +507,7 @@
 				TargetAttributes = {
 					AA0D304A224600B800D83DC7 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -516,12 +575,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAB6C087224BC60C00BFCE63 /* LocationService.m in Sources */,
+				8486BD2B2256253F0067F824 /* FavoriteTicket+CoreDataClass.m in Sources */,
 				AA0D30AE2247F64500D83DC7 /* FeedsViewController.m in Sources */,
+				8486BD1D22561C970067F824 /* TicketsDataModel.xcdatamodeld in Sources */,
 				AA0D3087224767F400D83DC7 /* ApiManager.m in Sources */,
 				AA0D3072224603DD00D83DC7 /* City.m in Sources */,
 				AA0D309E2247B58B00D83DC7 /* TicketCell.m in Sources */,
 				AA24392B2250B72100E6816B /* TabBarController.m in Sources */,
 				AA0D306E2246036400D83DC7 /* Country.m in Sources */,
+				8486BD2C2256253F0067F824 /* FavoriteTicket+CoreDataProperties.m in Sources */,
 				AAB6C08F224BCC9700BFCE63 /* MapViewController.m in Sources */,
 				AA0D307A2246056800D83DC7 /* DataManager.m in Sources */,
 				AA0D308322466ABA00D83DC7 /* PlaceCell.m in Sources */,
@@ -534,6 +596,7 @@
 				AAB6C08B224BC78800BFCE63 /* MapPrice.m in Sources */,
 				AA0D3076224604B000D83DC7 /* Airport.m in Sources */,
 				AA0D30932247AEC900D83DC7 /* Ticket.m in Sources */,
+				8486BD0A225609230067F824 /* CoreDataHelper.m in Sources */,
 				AA0D30682246019400D83DC7 /* MainViewController.m in Sources */,
 				AA0D30AA2247F1E800D83DC7 /* FeedCell.m in Sources */,
 				AA0D3050224600B800D83DC7 /* AppDelegate.m in Sources */,
@@ -672,6 +735,7 @@
 			baseConfigurationReference = 85D7910E8B400683DB944C3B /* Pods-Avia Tickets.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7J4TANDD7J;
 				INFOPLIST_FILE = "Avia Tickets/Info.plist";
@@ -681,6 +745,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.marat.homework.aviatickets.Avia-Tickets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Avia Tickets/CoreData/Models/FavoriteTicket/Avia Tickets-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -690,6 +757,7 @@
 			baseConfigurationReference = 356FFAD4A728D9ED6DF4C8AF /* Pods-Avia Tickets.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7J4TANDD7J;
 				INFOPLIST_FILE = "Avia Tickets/Info.plist";
@@ -699,6 +767,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.marat.homework.aviatickets.Avia-Tickets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Avia Tickets/CoreData/Models/FavoriteTicket/Avia Tickets-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -725,6 +795,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8486BD1B22561C970067F824 /* TicketsDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8486BD1C22561C970067F824 /* TicketsDataModel.xcdatamodel */,
+			);
+			currentVersion = 8486BD1C22561C970067F824 /* TicketsDataModel.xcdatamodel */;
+			path = TicketsDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AA0D3043224600B800D83DC7 /* Project object */;
 }

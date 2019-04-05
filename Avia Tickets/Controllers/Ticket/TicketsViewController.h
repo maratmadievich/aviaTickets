@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "TicketCell.h"
+#import "CoreDataHelper.h"
 
 @interface TicketsViewController : UITableViewController
+
+    @property (nonatomic) bool isFavorites;
     
     @property (nonatomic, strong) NSArray *tickets;
     
     
     - (instancetype)initWithTickets:(NSArray *)tickets;
+
+    - (instancetype)initFavoriteTicketsController;
     
 @end
