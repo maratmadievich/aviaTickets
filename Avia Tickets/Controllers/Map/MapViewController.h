@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "APIManager.h"
 #import "DataManager.h"
+#import "CoreDataHelper.h"
 #import "LocationService.h"
 
 
@@ -22,5 +23,10 @@
     @property (nonatomic, strong) City *origin;
 
     @property (nonatomic, strong) NSArray *prices;
+
+
+    - (void)getMapPriceBy:(NSString *)title;
+
+    - (void) showFavoriteAlert:(MapPrice *) mapPrice;
 
 @end

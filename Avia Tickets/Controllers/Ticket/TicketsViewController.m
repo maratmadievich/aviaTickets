@@ -24,13 +24,17 @@
         
             _isFavorites = YES;
             
+            _isTickets = YES;
+            
             self.tickets = [NSArray new];
             
-            self.title = @"Избранное";
+            self.prices = [NSArray new];
+            
             
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             
             [self.tableView registerClass:[TicketCell class] forCellReuseIdentifier:TicketCellReuseIdentifier];
+            
         }
         
         return self;
@@ -42,6 +46,10 @@
         self = [super init];
         
         if (self) {
+            
+            _isFavorites = NO;
+            
+            _isTickets = YES;
             
             _tickets = tickets;
             
@@ -62,13 +70,47 @@
         
         if (_isFavorites) {
             
-            self.navigationController.navigationBar.prefersLargeTitles = YES;
+            self.tickets = [[CoreDataHelper sharedInstance] favorites];
             
-            _tickets = [[CoreDataHelper sharedInstance] favorites];
-            
-            [self.tableView reloadData];
+            self.prices = [[CoreDataHelper sharedInstance] favoriteMapPrices];
         }
         
+        [self.tableView reloadData];
+        
+    }
+
+    - (void)viewDidLoad {
+        
+        [super viewDidLoad];
+        
+        if (_isFavorites) {
+            
+            self.navigationController.navigationBar.prefersLargeTitles = YES;
+            
+            self.navigationController.navigationBar.translucent = NO;
+            
+            self.title = @"Избранное";
+            
+            
+            _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Билеты", @"Из карты"]];
+            
+            [_segmentedControl addTarget:self action:@selector(changeSource) forControlEvents:UIControlEventValueChanged];
+            
+            _segmentedControl.tintColor = [UIColor blackColor];
+            
+            self.navigationItem.titleView = _segmentedControl;
+            
+            _segmentedControl.selectedSegmentIndex = 0;
+        }
+    
+    }
+
+
+    - (void)changeSource {
+        
+        _isTickets = _segmentedControl.selectedSegmentIndex == 0;
+        
+        [self.tableView reloadData];
     }
 
     
@@ -77,7 +119,7 @@
     
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
        
-        return _tickets.count;
+        return _isTickets ? _tickets.count : _prices.count;
     }
     
     - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,8 +127,16 @@
         TicketCell *cell = [tableView dequeueReusableCellWithIdentifier:TicketCellReuseIdentifier forIndexPath:indexPath];
         
         if (_isFavorites) {
+            
+            if (_isTickets) {
+                
+                cell.favoriteTicket = [_tickets objectAtIndex:indexPath.row];
+            }
+            else {
+                
+                cell.favoriteMapPrice = [_prices objectAtIndex:indexPath.row];
+            }
         
-            cell.favoriteTicket = [_tickets objectAtIndex:indexPath.row];
         }
         else {
            

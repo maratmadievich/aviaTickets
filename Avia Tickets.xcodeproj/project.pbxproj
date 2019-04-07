@@ -169,6 +169,7 @@
 		8486BD07225608E80067F824 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AAA3AE492259C86E007B0568 /* FavoriteMapPrice */,
 				8486BCFC2256086E0067F824 /* FavoriteTicket */,
 			);
 			path = Models;
@@ -438,6 +439,13 @@
 				AA24392D2250C4C000E6816B /* PlaceCollectionCell.m */,
 			);
 			path = PlaceCollection;
+			sourceTree = "<group>";
+		};
+		AAA3AE492259C86E007B0568 /* FavoriteMapPrice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FavoriteMapPrice;
 			sourceTree = "<group>";
 		};
 		AAB6C084224BC56700BFCE63 /* LocationManager */ = {
