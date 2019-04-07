@@ -22,7 +22,7 @@
         
             self.viewControllers = [self createViewControllers];
            
-            self.tabBar.tintColor = [UIColor blueColor];
+            self.tabBar.tintColor = [UIColor blackColor];
         }
         
         return self;
@@ -41,6 +41,7 @@
         
         [controllers addObject: mainNavigationController];
         
+       
         MapViewController *mapViewController = [[MapViewController alloc] init];
         
         mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle: @"Карта цен" image: [UIImage imageNamed: @"map"] selectedImage: [UIImage imageNamed: @"map"]];
@@ -49,6 +50,7 @@
        
         [controllers addObject:mapNavigationController];
         
+        
         FeedsViewController *feedsViewController = [[FeedsViewController alloc] init];
         
         feedsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle: @"Новости" image: [UIImage imageNamed: @"feed"] selectedImage: [UIImage imageNamed: @"feed"]];
@@ -56,6 +58,16 @@
         UINavigationController *feedsNavigationController = [[UINavigationController alloc] initWithRootViewController: feedsViewController];
         
         [controllers addObject:feedsNavigationController];
+        
+        
+        TicketsViewController *favoriteViewController = [[TicketsViewController alloc] initFavoriteTicketsController];
+       
+        favoriteViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Избранное" image:[UIImage imageNamed:@"favorite"] selectedImage:[UIImage imageNamed:@"favorite"]];
+        
+        UINavigationController *favoriteNavigationController = [[UINavigationController alloc] initWithRootViewController:favoriteViewController];
+        
+        [controllers addObject:favoriteNavigationController];
+
 
         return controllers;
     }
