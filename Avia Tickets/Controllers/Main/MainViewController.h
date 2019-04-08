@@ -13,6 +13,8 @@
 #import "Enums.h"
 #import "ApiManager.h"
 #import "DataManager.h"
+#import "ProgressView.h"
+#import "FirstViewController.h"
 
 
 @interface MainViewController : UIViewController
