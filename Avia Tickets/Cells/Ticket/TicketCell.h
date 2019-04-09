@@ -37,4 +37,7 @@
 
     - (void)setFavoriteMapPrice:(FavoriteMapPrice *)favoriteMapPrice;
 
+
+    - (void)animate;
+
 @end

@@ -102,9 +102,9 @@
             self.tickets = [[CoreDataHelper sharedInstance] favorites];
             
             self.prices = [[CoreDataHelper sharedInstance] favoriteMapPrices];
+            
+            [self.tableView reloadData];
         }
-        
-        [self.tableView reloadData];
         
     }
 
@@ -150,7 +150,8 @@
        
         return _isTickets ? _tickets.count : _prices.count;
     }
-    
+
+
     - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
        
         TicketCell *cell = [tableView dequeueReusableCellWithIdentifier:TicketCellReuseIdentifier forIndexPath:indexPath];
@@ -174,13 +175,47 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        [cell animate];
+        
         return cell;
     }
-    
+
+
     - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
        
         return 140.0;
     }
+
+
+    - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+        
+        cell.alpha = 0;
+        
+        cell.transform = CGAffineTransformMakeTranslation(-cell.frame.size.width, 0);
+        
+        [UIView animateWithDuration:0.5
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             
+                             cell.transform = CGAffineTransformMakeTranslation(0, 0);
+        
+                             cell.alpha = 0.8;
+                         }
+                         completion:^(BOOL finished) {
+                             
+                             [UIView animateWithDuration:0.2
+                                                   delay:0.1
+                                                 options:UIViewAnimationOptionCurveEaseOut
+                                              animations:^{
+                                                  
+                                                  cell.contentView.alpha = 1;
+                                              }
+                                              completion:nil];
+                         }];
+        
+    }
+
 
     - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         
@@ -257,7 +292,17 @@
         
         [[NotificationCenter sharedInstance] sendNotification:notification];
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Успешно" message:[NSString stringWithFormat:@"Уведомление будет отправлено - %@", _datePicker.date] preferredStyle:(UIAlertControllerStyleAlert)];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        
+//        [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+        
+        NSLocale *ruLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"];
+        
+        [formatter setLocale:ruLocale];
+        
+        [formatter setDateFormat:@"dd MMMM yyyy в HH:mm"];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Успешно" message:[NSString stringWithFormat:@"Уведомление будет отправлено - %@", [formatter stringFromDate:_datePicker.date]] preferredStyle:(UIAlertControllerStyleAlert)];
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Закрыть" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
