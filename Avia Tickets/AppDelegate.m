@@ -29,6 +29,8 @@
     
     [self.window makeKeyAndVisible];
     
+    [[NotificationCenter sharedInstance] registerService];
+    
     return YES;
 }
 

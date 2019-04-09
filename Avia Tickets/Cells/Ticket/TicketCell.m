@@ -140,6 +140,52 @@
 //        [_airlineLogoView yy_setImageWithURL:urlLogo options:YYWebImageOptionSetImageWithFadeAnimation];
     }
 
+
+//    - (void)prepareForReuse {
+//
+//        CGPoint center = self.contentView.center;
+//
+//        NSLog(@"%ld", (long)center.x);
+//
+//
+//    [UIView animateWithDuration:0.0
+//                          delay:0.0
+//                        options:UIViewAnimationOptionCurveEaseIn
+//                     animations:^{
+//
+//
+//                         self.contentView.center = CGPointMake(-center.x, center.y);
+////                         self.contentView.bounds = 0.0;
+////                         self.contentView.alpha = 0.0;
+//                     } completion:^(BOOL finished) {
+//
+//                         [UIView animateWithDuration:0.4
+//                                               delay:0.1
+//                                             options:UIViewAnimationOptionCurveEaseOut
+//                                          animations:^{
+////                                              self.contentView.alpha = 1.0;
+//                                              self.contentView.center = CGPointMake(center.x, center.y);
+//                                          } completion:nil];
+//
+//                     }];
+//    }
+
+
+- (void)animate {
+    
+    self.transform = CGAffineTransformMakeTranslation(0, self.frame.size.height);
+//    cell.transform = CGAffineTransform(translationX: 0, y: rowHeight)
+    
+    [UIView animateWithDuration:0.0
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         
+                         self.transform = CGAffineTransformMakeTranslation(0, 0);
+                     } completion: NULL];
+    
+}
+
     
     
 @end

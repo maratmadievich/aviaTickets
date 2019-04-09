@@ -7,20 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
 #import "TicketCell.h"
 #import "CoreDataHelper.h"
+#import "NotificationCenter.h"
+
 
 @interface TicketsViewController : UITableViewController
 
+    @property (nonatomic) bool isTickets;
+
     @property (nonatomic) bool isFavorites;
 
-    @property (nonatomic) bool isTickets;
-    
-    @property (nonatomic, strong) NSArray *tickets;
 
     @property (nonatomic, strong) NSArray *prices;
 
+    @property (nonatomic, strong) NSArray *tickets;
+
+    @property (nonatomic, strong) UIDatePicker *datePicker;
+
+    @property (nonatomic, strong) UITextField *dateTextField;
+
     @property (nonatomic, strong) UISegmentedControl *segmentedControl;
+
+    @property (nonatomic, strong) TicketCell *notificationCell;
     
     
     - (instancetype)initWithTickets:(NSArray *)tickets;
