@@ -89,7 +89,7 @@
         [self.view addSubview:_collectionView];
         
         
-        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Города", @"Аэропорты"]];
+        _segmentedControl = [[UISegmentedControl alloc] initWithItems:@[[@"place_cities" localize], [@"place_airports" localize]]];
         
         [_segmentedControl addTarget:self action:@selector(changeSource) forControlEvents:UIControlEventValueChanged];
         
@@ -103,11 +103,11 @@
         
         if (_placeType == PlaceTypeDeparture) {
             
-            self.title = @"Откуда";
+            self.title = [@"main_from" localize];
         }
         else {
             
-            self.title = @"Куда";
+            self.title = [@"main_to" localize];
         }
         
     }

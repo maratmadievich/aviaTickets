@@ -35,7 +35,7 @@
         
         MainViewController *mainViewController = [[MainViewController alloc] init];
         
-        mainViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle: @"Поиск" image: [UIImage imageNamed: @"search"] selectedImage: [UIImage imageNamed: @"search"]];
+        mainViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle: [@"search_tab" localize] image: [UIImage imageNamed: @"search"] selectedImage: [UIImage imageNamed: @"search"]];
         
         UINavigationController *mainNavigationController = [[UINavigationController alloc] initWithRootViewController: mainViewController];
         
@@ -44,7 +44,7 @@
        
         MapViewController *mapViewController = [[MapViewController alloc] init];
         
-        mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle: @"Карта цен" image: [UIImage imageNamed: @"map"] selectedImage: [UIImage imageNamed: @"map"]];
+        mapViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle: [@"map_tab" localize] image: [UIImage imageNamed: @"map"] selectedImage: [UIImage imageNamed: @"map"]];
         
         UINavigationController *mapNavigationController = [[UINavigationController alloc] initWithRootViewController: mapViewController];
        
@@ -53,7 +53,7 @@
         
         FeedsViewController *feedsViewController = [[FeedsViewController alloc] init];
         
-        feedsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle: @"Новости" image: [UIImage imageNamed: @"feed"] selectedImage: [UIImage imageNamed: @"feed"]];
+        feedsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle: [@"feed_tab" localize] image: [UIImage imageNamed: @"feed"] selectedImage: [UIImage imageNamed: @"feed"]];
         
         UINavigationController *feedsNavigationController = [[UINavigationController alloc] initWithRootViewController: feedsViewController];
         
@@ -62,7 +62,7 @@
         
         TicketsViewController *favoriteViewController = [[TicketsViewController alloc] initFavoriteTicketsController];
        
-        favoriteViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Избранное" image:[UIImage imageNamed:@"favorite"] selectedImage:[UIImage imageNamed:@"favorite"]];
+        favoriteViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:[@"favorites_tab" localize] image:[UIImage imageNamed:@"favorite"] selectedImage:[UIImage imageNamed:@"favorite"]];
         
         UINavigationController *favoriteNavigationController = [[UINavigationController alloc] initWithRootViewController:favoriteViewController];
         

@@ -10,6 +10,7 @@
 #import "FeedCell.h"
 #import "ApiManager.h"
 #import "FeedInfoViewController.h"
+#import "NSString+Localize.h"
 
 
 @interface FeedsViewController : UITableViewController

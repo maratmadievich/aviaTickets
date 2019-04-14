@@ -74,7 +74,7 @@
         
         self.navigationController.navigationBar.translucent = NO;
         
-        self.title = @"Поиск";
+        self.title = [@"main_title" localize];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadDataComplete) name:kDataManagerLoadDataDidComplete object:nil];
     }
@@ -99,7 +99,7 @@
         
         _departureButton = [UIButton buttonWithType:UIButtonTypeSystem];
        
-        [_departureButton setTitle:@"Откуда" forState: UIControlStateNormal];
+        [_departureButton setTitle:[@"main_from" localize] forState: UIControlStateNormal];
         
         _departureButton.tintColor = [UIColor blackColor];
         
@@ -116,7 +116,7 @@
         
         _arrivalButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
-        [_arrivalButton setTitle:@"Куда" forState: UIControlStateNormal];
+        [_arrivalButton setTitle:[@"main_to" localize] forState: UIControlStateNormal];
         
         _arrivalButton.tintColor = [UIColor blackColor];
         
@@ -135,7 +135,7 @@
         
         _searchButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
-        [_searchButton setTitle:@"Найти" forState:UIControlStateNormal];
+        [_searchButton setTitle:[@"main_search" localize] forState:UIControlStateNormal];
         
         _searchButton.tintColor = [UIColor whiteColor];
         
@@ -190,9 +190,9 @@
                         }
                         else {
                             
-                            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Увы!" message:@"По данному направлению билетов не найдено" preferredStyle: UIAlertControllerStyleAlert];
+                            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[@"error" localize] message:[@"tickets_not_found" localize] preferredStyle: UIAlertControllerStyleAlert];
                             
-                            [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть" style:(UIAlertActionStyleDefault) handler:nil]];
+                            [alertController addAction:[UIAlertAction actionWithTitle:[@"close" localize] style:(UIAlertActionStyleDefault) handler:nil]];
                             
                             [self presentViewController:alertController animated:YES completion:nil];
                         }
@@ -206,33 +206,13 @@
         }
         else {
            
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Ошибка" message:@"Необходимо указать место отправления и место прибытия" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[@"error" localize] message:[@"not_set_place_arrival_or_departure" localize] preferredStyle:UIAlertControllerStyleAlert];
             
-            [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть" style:(UIAlertActionStyleDefault) handler:nil]];
+            [alertController addAction:[UIAlertAction actionWithTitle:[@"close" localize] style:(UIAlertActionStyleDefault) handler:nil]];
            
             [self presentViewController:alertController animated:YES completion:nil];
         }
 
-       
-//        [[ApiManager sharedInstance] ticketsWithRequest:_searchRequest withCompletion:^(NSArray *tickets) {
-//
-//            if (tickets.count > 0) {
-//
-//                TicketsViewController *ticketsViewController = [[TicketsViewController alloc] initWithTickets:tickets];
-//
-//                [self.navigationController showViewController:ticketsViewController sender:self];
-//            }
-//            else {
-//
-//                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Увы!" message:@"По данному направлению билетов не найдено" preferredStyle: UIAlertControllerStyleAlert];
-//
-//                [alertController addAction:[UIAlertAction actionWithTitle:@"Закрыть" style:(UIAlertActionStyleDefault) handler:nil]];
-//
-//                [self presentViewController:alertController animated:YES completion:nil];
-//            }
-//
-//        }];
-        
     }
     
     

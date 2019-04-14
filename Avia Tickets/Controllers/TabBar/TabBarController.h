@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "FeedsViewController.h"
 #import "TicketsViewController.h"
+#import "NSString+Localize.h"
 
 @interface TabBarController : UITabBarController
 

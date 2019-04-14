@@ -15,6 +15,7 @@
 #import "DataManager.h"
 #import "ProgressView.h"
 #import "FirstViewController.h"
+#import "NSString+Localize.h"
 
 
 @interface MainViewController : UIViewController

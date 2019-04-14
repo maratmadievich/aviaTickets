@@ -1,0 +1,72 @@
+/* 
+  Localizable.strings
+  Avia Tickets
+
+  Created by Марат Нургалиев on 14/04/2019.
+  Copyright © 2019 Марат Нургалиев. All rights reserved.
+*/
+
+
+// TabBarController
+
+"search_tab" = "Search";
+"map_tab" = "Price map";
+"favorites_tab" = "Favorite";
+"feed_tab" = "News";
+
+
+// MainViewController
+
+"main_title" = "Search";
+"main_from" = "From";
+"main_to" = "To";
+"main_search" = "Search";
+
+
+// MapViewController
+
+"map_title" = "Price map";
+
+
+// PlaceViewController
+
+"place_cities" = "Cities";
+"place_airports" = "Airports";
+
+
+// FirstViewController
+
+"about_app_header" = "About App";
+"tickets_header" = "TICKETS";
+"map_price_header" = "PRICE MAP";
+"favorites_header" = "FAVORITE";
+
+"about_app_describe" = "Airline search application";
+"tickets_describe" = "Find the cheapest flights";
+"map_price_describe" = "View price map";
+"favorites_describe" = "Save selected tickets to favorites";
+
+"next_button" = "NEXT";
+"done_button" = "DONE";
+
+
+// TicketsViewController
+
+"tickets_title" = "Tickets";
+"tickets_from_map" = "From map";
+"add_to_favorite" = "Add to favorite";
+"remove_from_favorite" = "Remove from favorite";
+"remind_me" = "Remind me";
+"ticket_reminder" = "Ticket reminder";
+"notification_will_be_sent" = "Notification will be send";
+"success" = "Success";
+
+// Alerts
+
+"error" = "Error";
+"tickets_not_found" = "No tickets found for this destination";
+"close" = "Close";
+"not_set_place_arrival_or_departure" = "You must specify the place of departure and place of arrival";
+"actions_with_tickets" = "Actions with tickets";
+"actions_with_tickets_describe" = "What needs to be done with the selected ticket?";
+"not_determine_current_city" = "Could not determine current city!";

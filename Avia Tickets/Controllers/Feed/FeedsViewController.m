@@ -50,7 +50,7 @@
             [self.tableView reloadData];
         }];
         
-        self.title = @"Новости";
+        self.title = [@"feed_tab" localize];
             
     }
 

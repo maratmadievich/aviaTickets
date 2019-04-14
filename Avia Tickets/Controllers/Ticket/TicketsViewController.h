@@ -11,6 +11,7 @@
 #import "TicketCell.h"
 #import "CoreDataHelper.h"
 #import "NotificationCenter.h"
+#import "NSString+Localize.h"
 
 
 @interface TicketsViewController : UITableViewController
