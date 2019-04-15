@@ -15,26 +15,17 @@
 @interface CloudManager : NSObject
 
 + (instancetype)sharedInstance;
-//
-//
-//@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-//
-//@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-//
-//@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
-//
-//
-//- (NSArray *)favorites;
-//
-//- (BOOL)isFavorite:(Ticket *)ticket;
-//
+
+
 - (void)addToFavorite:(Ticket *)ticket;
 
 - (void)favorites:(void (^)(NSArray *favorites))completion;
 
+- (void)isFavorite:(Ticket *)ticket withCompletion:(void (^)(BOOL isFavorite))completion;
+
 - (void)returnFavorite:(Ticket *)ticket withCompletion:(void (^)(CKRecord *favoriteTicket))completion;
-//
-//- (void)removeFromFavorite:(Ticket *)ticket;
+
+- (void)removeFromFavorite:(Ticket *)ticket;
 
 
 //- (NSArray *)favoriteMapPrices;

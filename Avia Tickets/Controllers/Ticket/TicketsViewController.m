@@ -102,6 +102,11 @@
             [[CloudManager sharedInstance] favorites: ^(NSArray *tickets) {
                 
                 self.tickets = tickets;
+                
+                if (self.isTickets) {
+                    
+                    [self.tableView reloadData];
+                }
             }];
             
             self.prices = [[CoreDataHelper sharedInstance] favoriteMapPrices];
@@ -238,39 +243,45 @@
         
         if (_isFavorites) return;
         
+        [self showAlert:[_tickets objectAtIndex:indexPath.row] indexPath:indexPath];
+    }
+
+
+- (void)showAlert:(Ticket *)ticket indexPath:(NSIndexPath *) indexPath {
+    
+    [[CloudManager sharedInstance] isFavorite:ticket withCompletion:^(BOOL isFavorite) {
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[@"actions_with_tickets" localize] message:[@"actions_with_tickets_describe" localize] preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction *favoriteAction;
         
-        if ([[CoreDataHelper sharedInstance] isFavorite: [_tickets objectAtIndex:indexPath.row]]) {
-        
-            favoriteAction = [UIAlertAction actionWithTitle:[@"remove_from_favorite" localize] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if (isFavorite) {
             
-                [[CoreDataHelper sharedInstance] removeFromFavorite:[self->_tickets objectAtIndex:indexPath.row]];
+            favoriteAction = [UIAlertAction actionWithTitle:[@"remove_from_favorite" localize] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                
+                [[CloudManager sharedInstance] removeFromFavorite:ticket];
             }];
             
         }
         else {
-        
-            favoriteAction = [UIAlertAction actionWithTitle:[@"add_to_favorite" localize] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-//                [[CoreDataHelper sharedInstance] addToFavorite:[self->_tickets objectAtIndex:indexPath.row]];
+            favoriteAction = [UIAlertAction actionWithTitle:[@"add_to_favorite" localize] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
-                [[CloudManager sharedInstance] addToFavorite:[self->_tickets objectAtIndex:indexPath.row]];
+                [[CloudManager sharedInstance] addToFavorite:ticket];
             }];
             
         }
         
         UIAlertAction *notificationAction = [UIAlertAction actionWithTitle:[@"remind_me" localize] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
             
-            _notificationCell = [tableView cellForRowAtIndexPath:indexPath];
+            self->_notificationCell = [self.tableView cellForRowAtIndexPath:indexPath];
             
-            [_dateTextField becomeFirstResponder];
+            [self->_dateTextField becomeFirstResponder];
         }];
-
+        
         
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[@"close" localize] style:UIAlertActionStyleCancel handler:nil];
-       
+        
         [alertController addAction:favoriteAction];
         
         [alertController addAction:notificationAction];
@@ -278,7 +289,8 @@
         [alertController addAction:cancelAction];
         
         [self presentViewController:alertController animated:YES completion:nil];
-    }
+    }];
+}
 
 
 - (void)doneButtonDidTap:(UIBarButtonItem *)sender {

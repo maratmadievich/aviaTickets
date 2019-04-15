@@ -27,49 +27,9 @@
     
     return instance;
 }
-//
-//
-//- (void)setup {
-//    
-//    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"TicketsDataModel" withExtension:@"momd"];
-//    
-//    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-//    
-//    NSURL *docsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-//    
-//    NSURL *storeURL = [docsURL URLByAppendingPathComponent:@"TicketsDataModel.sqlite"];
-//    
-//    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
-//    
-//    NSPersistentStore* store = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:nil];
-//    
-//    if (!store) {
-//        
-//        abort();
-//    }
-//    
-//    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-//    
-//    _managedObjectContext.persistentStoreCoordinator = _persistentStoreCoordinator;
-//}
-//
-//
-//- (void)save {
-//    
-//    NSError *error;
-//    
-//    [_managedObjectContext save: &error];
-//    
-//    if (error) {
-//        
-//        NSLog(@"%@", [error localizedDescription]);
-//    }
-//    
-//}
-//
-//
-//#pragma mark - Work with Tickets
-//
+
+
+#pragma mark - Work with Tickets
 
 - (void)addToFavorite:(Ticket *)ticket {
     
@@ -122,58 +82,40 @@
 }
 
 
-//typedef void(^isFavorite)(BOOL):(Ticket *)ticket;
-
-
-- (BOOL)isFavorite:(Ticket *)ticket {
+- (void)isFavorite:(Ticket *)ticket withCompletion:(void (^)(BOOL isFavorite))completion {
 
     [self returnFavorite:ticket withCompletion:^(CKRecord *favoriteTicket) {
         
-        return favoriteTicket == NULL ? true : false;
+        completion(favoriteTicket != NULL ? true : false);
     }];
+    
 }
 
 
-//bool (^findFavorite)(Ticket *) = ^(Ticket *ticket) {
-//
-//    CKContainer *container = [CKContainer defaultContainer];
-//
-//        CKDatabase *privateDatabase = [container privateCloudDatabase];
-//
-//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price == %ld AND airline == %@ AND from == %@ AND to == %@ AND departure == %@ AND expires == %@ AND flightNumber == %ld", (long)ticket.price.integerValue, ticket.airline, ticket.from, ticket.to, ticket.departure, ticket.expires, (long)ticket.flightNumber.integerValue];
-//
-//        CKQuery *query = [[CKQuery alloc] initWithRecordType:@"Tickets" predicate:predicate];
-//
-//
+- (void)removeFromFavorite:(Ticket *)ticket {
 
-//        [privateDatabase performQuery:query inZoneWithID:nil completionHandler:^(NSArray<CKRecord *> * _Nullable results, NSError * _Nullable error) {
-//
-//            if (error) {
-//
-//                return false;
-//            }
-//            else {
-//
-//                return results.count > 0 ? true : false;
-//            }
-//        }];
-//};
+    [self returnFavorite:ticket withCompletion:^(CKRecord *favoriteTicket) {
+        
+        CKContainer *container = [CKContainer defaultContainer];
+        
+        CKDatabase *publicDatabase = [container publicCloudDatabase];
+        
+        [publicDatabase deleteRecordWithID:favoriteTicket.recordID completionHandler:^(CKRecordID * _Nullable recordID, NSError * _Nullable error) {
+            
+            if (error) {
+                
+                // Ошибка
+                NSLog(@"Удаление данных из iCloud: Что-то пошло не так. %@", error);
+            }
+            else {
+                
+                NSLog(@"Удаление данных из iCloud: Удаление прошло успешно");
+            }
+            
+        }];
+    }];
 
-
-//
-//
-//- (void)removeFromFavorite:(Ticket *)ticket {
-//
-//    FavoriteTicket *favorite = [self favoriteFromTicket:ticket];
-//
-//    if (favorite) {
-//
-//        [_managedObjectContext deleteObject:favorite];
-//
-//        [self save];
-//    }
-//
-//}
+}
 
 - (void)returnFavorite:(Ticket *)ticket withCompletion:(void (^)(CKRecord * _Nullable favoriteTicket))completion {
     
@@ -181,7 +123,7 @@
     
     CKDatabase *publicDatabase = [container publicCloudDatabase];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price == %ld AND airline == %@ AND from == %@ AND to == %@ AND departure == %@ AND expires == %@ AND flightNumber == %ld", (long)ticket.price.integerValue, ticket.airline, ticket.from, ticket.to, ticket.departure, ticket.expires, (long)ticket.flightNumber.integerValue];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price == %ld AND airline == %@ AND from == %@ AND to == %@ AND flightNumber == %ld", (long)ticket.price.integerValue, ticket.airline, ticket.from, ticket.to, (long)ticket.flightNumber.integerValue];
     
     CKQuery *query = [[CKQuery alloc] initWithRecordType:@"Tickets" predicate:predicate];
     
@@ -203,7 +145,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                completion(results[0]);
+                completion(results.count > 0 ? results[0] : nil);
             });
         }
         
@@ -218,7 +160,7 @@
 
     CKDatabase *publicDatabase = [container publicCloudDatabase];
 
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price > 0"];//, @"Today publication"//@"from = %@", @"TSE"
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price > 0"];
 
     CKQuery *query = [[CKQuery alloc] initWithRecordType:@"Tickets" predicate:predicate];
 
@@ -245,9 +187,6 @@
     }];
 
 }
-
-
-
 
 @end
 

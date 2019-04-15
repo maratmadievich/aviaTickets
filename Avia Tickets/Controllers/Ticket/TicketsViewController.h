@@ -46,5 +46,7 @@
     - (instancetype)initWithTickets:(NSArray *)tickets;
 
     - (instancetype)initFavoriteTicketsController;
+
+- (void)showAlert:(Ticket *)ticket;
     
 @end
