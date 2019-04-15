@@ -10,7 +10,7 @@
 
 #define TicketCellReuseIdentifier @"TicketCellIdentifier"
 
-@interface TicketsViewController ()
+@interface TicketsViewController () <TicketsDelegate>
 
 @end
 
@@ -99,7 +99,10 @@
         
         if (_isFavorites) {
             
-            self.tickets = [[CoreDataHelper sharedInstance] favorites];
+            [[CloudManager sharedInstance] favorites: ^(NSArray *tickets) {
+                
+                self.tickets = tickets;
+            }];
             
             self.prices = [[CoreDataHelper sharedInstance] favoriteMapPrices];
             
@@ -140,6 +143,18 @@
         _isTickets = _segmentedControl.selectedSegmentIndex == 0;
         
         [self.tableView reloadData];
+    }
+
+
+    - (void)didLoadTickets:(NSArray *)tickets {
+    
+        self.tickets = tickets;
+        
+        if (_isFavorites && _isTickets) {
+            
+            [self.tableView reloadData];
+        }
+    
     }
 
     
@@ -239,7 +254,9 @@
         
             favoriteAction = [UIAlertAction actionWithTitle:[@"add_to_favorite" localize] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-                [[CoreDataHelper sharedInstance] addToFavorite:[self->_tickets objectAtIndex:indexPath.row]];
+//                [[CoreDataHelper sharedInstance] addToFavorite:[self->_tickets objectAtIndex:indexPath.row]];
+                
+                [[CloudManager sharedInstance] addToFavorite:[self->_tickets objectAtIndex:indexPath.row]];
             }];
             
         }

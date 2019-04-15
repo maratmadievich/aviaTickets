@@ -7,15 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CloudKit/CloudKit.h>
 #import "Ticket.h"
 #import "MapPrice.h"
-#import "DataManager.h"
-#import "FavoriteTicket+CoreDataClass.h"
-#import "FavoriteMapPrice+CoreDataClass.h"
+#import "TicketsViewController.h"
 
 @interface CloudManager : NSObject
 
-//+ (instancetype)sharedInstance;
++ (instancetype)sharedInstance;
 //
 //
 //@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -29,7 +28,11 @@
 //
 //- (BOOL)isFavorite:(Ticket *)ticket;
 //
-//- (void)addToFavorite:(Ticket *)ticket;
+- (void)addToFavorite:(Ticket *)ticket;
+
+- (void)favorites:(void (^)(NSArray *favorites))completion;
+
+- (void)returnFavorite:(Ticket *)ticket withCompletion:(void (^)(CKRecord *favoriteTicket))completion;
 //
 //- (void)removeFromFavorite:(Ticket *)ticket;
 

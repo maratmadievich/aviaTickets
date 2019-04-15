@@ -14,21 +14,19 @@
 
 @implementation CloudManager
 
-//+ (instancetype)sharedInstance {
-//    
-//    static CoreDataHelper *instance;
-//    
-//    static dispatch_once_t onceToken;
-//    
-//    dispatch_once(&onceToken, ^{
-//        
-//        instance = [[CoreDataHelper alloc] init];
-//        
-//        [instance setup];
-//    });
-//    
-//    return instance;
-//}
++ (instancetype)sharedInstance {
+    
+    static CloudManager *instance;
+    
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        
+        instance = [[CloudManager alloc] init];
+    });
+    
+    return instance;
+}
 //
 //
 //- (void)setup {
@@ -72,80 +70,181 @@
 //
 //#pragma mark - Work with Tickets
 //
-//- (void)addToFavorite:(Ticket *)ticket {
-//    
-//    CKRecordID *publicationRecordID = [[CKRecordID alloc] initWithRecordName:@"115"];
-//    
-//    CKRecord *publicationRecord = [[CKRecord alloc] initWithRecordType:@"Publication" recordID:publicationRecordID];
-//    
-//    publicationRecord[@"title"] = @"Title for publication";
-//    publicationRecord[@"text"] = @"Text for publication";
-//    publicationRecord[@"date"] = [NSDate date];
-//    
-//    FavoriteTicket *favorite = [NSEntityDescription insertNewObjectForEntityForName:@"FavoriteTicket" inManagedObjectContext:_managedObjectContext];
-//    
-//    favorite.price = ticket.price.intValue;
-//    
-//    favorite.airline = ticket.airline;
-//    
-//    favorite.departure = ticket.departure;
-//    
-//    favorite.expires = ticket.expires;
-//    
-//    favorite.flightNumber = ticket.flightNumber.intValue;
-//    
-//    favorite.returnDate = ticket.returnDate;
-//    
-//    favorite.from = ticket.from;
-//    
-//    favorite.to = ticket.to;
-//    
-//    favorite.created = [NSDate date];
-//    
-//    [self save];
-//}
+
+- (void)addToFavorite:(Ticket *)ticket {
+    
+    NSDate *currentDate = [NSDate date];
+   
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+    
+    
+    CKRecordID *publicationRecordID = [[CKRecordID alloc] initWithRecordName:[formatter stringFromDate:currentDate]];
+    
+    CKRecord *publicationRecord = [[CKRecord alloc] initWithRecordType:@"Tickets" recordID:publicationRecordID];
+    
+    publicationRecord[@"airline"] = ticket.airline;
+    
+    publicationRecord[@"created"] = currentDate;
+    
+    publicationRecord[@"departure"] = ticket.departure;
+    
+    publicationRecord[@"expires"] = ticket.expires;
+    
+    publicationRecord[@"flightNumber"] = ticket.flightNumber;
+    
+    publicationRecord[@"from"] = ticket.from;
+    
+    publicationRecord[@"price"] = ticket.price;
+    
+    publicationRecord[@"returnDate"] = ticket.returnDate;
+    
+    publicationRecord[@"to"] = ticket.to;
+    
+    
+    CKContainer *container = [CKContainer defaultContainer];
+    
+    CKDatabase *publicDatabase = [container publicCloudDatabase];
+
+    [publicDatabase saveRecord:publicationRecord completionHandler:^(CKRecord * _Nullable record, NSError * _Nullable error) {
+        
+        if (error) {
+           
+            NSLog(@"Сохранение в iCloud: Что-то пошло не так. %@", error);
+            
+            return;
+        }
+        
+        NSLog(@"Сохранение в iCloud: Сохранение прошло успешно");
+    }];
+
+}
+
+
+//typedef void(^isFavorite)(BOOL):(Ticket *)ticket;
+
+
+- (BOOL)isFavorite:(Ticket *)ticket {
+
+    [self returnFavorite:ticket withCompletion:^(CKRecord *favoriteTicket) {
+        
+        return favoriteTicket == NULL ? true : false;
+    }];
+}
+
+
+//bool (^findFavorite)(Ticket *) = ^(Ticket *ticket) {
 //
-//- (BOOL)isFavorite:(Ticket *)ticket {
-//    
-//    return [self favoriteFromTicket: ticket] != nil;
-//}
+//    CKContainer *container = [CKContainer defaultContainer];
+//
+//        CKDatabase *privateDatabase = [container privateCloudDatabase];
+//
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price == %ld AND airline == %@ AND from == %@ AND to == %@ AND departure == %@ AND expires == %@ AND flightNumber == %ld", (long)ticket.price.integerValue, ticket.airline, ticket.from, ticket.to, ticket.departure, ticket.expires, (long)ticket.flightNumber.integerValue];
+//
+//        CKQuery *query = [[CKQuery alloc] initWithRecordType:@"Tickets" predicate:predicate];
 //
 //
-//- (FavoriteTicket *)favoriteFromTicket:(Ticket *)ticket {
-//    
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
-//    
-//    request.predicate = [NSPredicate predicateWithFormat:@"price == %ld AND airline == %@ AND from == %@ AND to == %@ AND departure == %@ AND expires == %@ AND flightNumber == %ld", (long)ticket.price.integerValue, ticket.airline, ticket.from, ticket.to, ticket.departure, ticket.expires, (long)ticket.flightNumber.integerValue];
-//    
-//    return [[_managedObjectContext executeFetchRequest:request error:nil] firstObject];
-//}
+
+//        [privateDatabase performQuery:query inZoneWithID:nil completionHandler:^(NSArray<CKRecord *> * _Nullable results, NSError * _Nullable error) {
 //
+//            if (error) {
 //
+//                return false;
+//            }
+//            else {
 //
+//                return results.count > 0 ? true : false;
+//            }
+//        }];
+//};
+
+
 //
 //
 //- (void)removeFromFavorite:(Ticket *)ticket {
-//    
+//
 //    FavoriteTicket *favorite = [self favoriteFromTicket:ticket];
-//    
+//
 //    if (favorite) {
-//        
+//
 //        [_managedObjectContext deleteObject:favorite];
-//        
+//
 //        [self save];
 //    }
-//    
-//}
 //
-//
-//- (NSArray *)favorites {
-//    
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"FavoriteTicket"];
-//    
-//    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"created" ascending:NO]];
-//    
-//    return [_managedObjectContext executeFetchRequest:request error:nil];
 //}
+
+- (void)returnFavorite:(Ticket *)ticket withCompletion:(void (^)(CKRecord * _Nullable favoriteTicket))completion {
+    
+    CKContainer *container = [CKContainer defaultContainer];
+    
+    CKDatabase *publicDatabase = [container publicCloudDatabase];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price == %ld AND airline == %@ AND from == %@ AND to == %@ AND departure == %@ AND expires == %@ AND flightNumber == %ld", (long)ticket.price.integerValue, ticket.airline, ticket.from, ticket.to, ticket.departure, ticket.expires, (long)ticket.flightNumber.integerValue];
+    
+    CKQuery *query = [[CKQuery alloc] initWithRecordType:@"Tickets" predicate:predicate];
+    
+    [publicDatabase performQuery:query inZoneWithID:nil completionHandler:^(NSArray<CKRecord *> * _Nullable results, NSError * _Nullable error) {
+        
+        if (error) {
+            
+            // Ошибка
+            NSLog(@"Получение данных из iCloud: Что-то пошло не так. %@", error);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(nil);
+            });
+        }
+        else {
+            
+            NSLog(@"Получение данных из iCloud: Выгрузка прошла успешно");
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(results[0]);
+            });
+        }
+        
+    }];
+
+}
+
+
+- (void)favorites:(void (^)(NSArray *favorites))completion {
+    
+    CKContainer *container = [CKContainer defaultContainer];
+
+    CKDatabase *publicDatabase = [container publicCloudDatabase];
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"price > 0"];//, @"Today publication"//@"from = %@", @"TSE"
+
+    CKQuery *query = [[CKQuery alloc] initWithRecordType:@"Tickets" predicate:predicate];
+
+    [publicDatabase performQuery:query inZoneWithID:nil completionHandler:^(NSArray<CKRecord *> * _Nullable results, NSError * _Nullable error) {
+
+        if (error) {
+            // Ошибка
+            NSLog(@"Получение данных из iCloud: Что-то пошло не так. %@", error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(nil);
+            });
+        }
+        else {
+            
+             NSLog(@"Получение данных из iCloud: Выгрузка прошла успешно");
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(results);
+            });
+        }
+
+    }];
+
+}
 
 
 
