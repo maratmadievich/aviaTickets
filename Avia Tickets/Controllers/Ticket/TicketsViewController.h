@@ -11,6 +11,16 @@
 #import "TicketCell.h"
 #import "CoreDataHelper.h"
 #import "NotificationCenter.h"
+#import "NSString+Localize.h"
+#import "CloudManager.h"
+
+@protocol TicketsDelegate
+
+@required //@optional
+
+- (void)didLoadTickets:(NSArray *)tickets;
+
+@end
 
 
 @interface TicketsViewController : UITableViewController
@@ -36,5 +46,7 @@
     - (instancetype)initWithTickets:(NSArray *)tickets;
 
     - (instancetype)initFavoriteTicketsController;
+
+- (void)showAlert:(Ticket *)ticket;
     
 @end

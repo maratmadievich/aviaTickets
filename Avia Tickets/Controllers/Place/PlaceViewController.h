@@ -10,6 +10,7 @@
 #import "PlaceCollectionCell.h"
 #import "DataManager.h"
 #import "Enums.h"
+#import "NSString+Localize.h"
 
 
 @protocol PlaceViewControllerDelegate <NSObject>

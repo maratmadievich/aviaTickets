@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CloudKit/CloudKit.h>
 #import <YYWebImage/YYWebImage.h>
 #import "APIManager.h"
 #import "DataManager.h"
 #import "FavoriteTicket+CoreDataClass.h"
 #import "FavoriteMapPrice+CoreDataClass.h"
+
 
 #define AirlineLogo(iata) [NSURL URLWithString:[NSString stringWithFormat:@"https://pics.avs.io/200/200/%@.png", iata]];
 
@@ -19,7 +21,7 @@
     
     @property (nonatomic, strong) Ticket *ticket;
 
-    @property (nonatomic, strong) FavoriteTicket *favoriteTicket;
+    @property (nonatomic, strong) CKRecord *favoriteTicket;
 
     @property (nonatomic, strong) FavoriteMapPrice *favoriteMapPrice;
     
@@ -33,7 +35,7 @@
     @property (nonatomic, strong) UILabel *dateLabel;
 
 
-    - (void)setFavoriteTicket:(FavoriteTicket *)favoriteTicket;
+    - (void)setFavoriteTicket:(CKRecord *)favoriteTicket;
 
     - (void)setFavoriteMapPrice:(FavoriteMapPrice *)favoriteMapPrice;
 

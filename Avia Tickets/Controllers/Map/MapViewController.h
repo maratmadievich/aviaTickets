@@ -12,6 +12,7 @@
 #import "DataManager.h"
 #import "CoreDataHelper.h"
 #import "LocationService.h"
+#import "NSString+Localize.h"
 
 
 @interface MapViewController: UIViewController

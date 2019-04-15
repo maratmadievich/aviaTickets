@@ -30,5 +30,7 @@
     
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+- (void)localizeName;
+
 @end
 
